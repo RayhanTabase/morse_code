@@ -28,6 +28,7 @@ MORSE_KEYS = {
 
 def convert_character(character)
   return character unless MORSE_KEYS[character]
+
   MORSE_KEYS[character]
 end
 
@@ -45,7 +46,7 @@ def decode_message(message)
   words = message.split('   ')
   decoded = ''
   words.each do |word|
-    decoded += convert_word(word) + ' '
+    decoded += "#{convert_word(word)} "
   end
   puts decoded
 end
