@@ -26,22 +26,26 @@ MORSE_KEYS = {
   '--..' => 'Z'
 }.freeze
 
-def convert_code(code)
-  MORSE_KEYS[code]
+def convert_character(character)
+  return character unless MORSE_KEYS[character]
+  MORSE_KEYS[character]
+end
+
+def convert_word(word)
+  characters = word.split
+  word = ''
+  characters.each do |character|
+    word += convert_character(character)
+  end
+  puts word
+  word
 end
 
 def decode_message(message)
-  words = message.split(/\s/)
-  puts words
+  words = message.split('   ')
   decoded = ''
   words.each do |word|
-    if word.include? '.' or word.include? '-'
-      decoded += convert_code(word)
-    else
-      puts word
-      decoded += ' ' if word == ''
-      decoded += word
-    end
+    decoded += convert_word(word) + ' '
   end
   puts decoded
 end
